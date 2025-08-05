@@ -90,13 +90,13 @@ class AppleMusicService {
 
   async getRandomSongs(decade: string, count: number = 4, excludeIds: Set<string> = new Set()): Promise<any[]> {
     try {
-      const songs = await this.searchBollywoodSongs(decade, 100, excludeIds);
+      const songs = await this.searchBollywoodSongs(decade, 200, excludeIds);
       
       if (songs.length < count) {
         // Fallback to general Bollywood search if decade-specific search fails
         console.log(`Not enough songs for ${decade}, trying general search...`);
         const fallbackResponse = await fetch(
-          `${this.baseUrl}?term=${encodeURIComponent('bollywood hindi songs')}&media=music&entity=song&country=IN&limit=100`
+          `${this.baseUrl}?term=${encodeURIComponent('bollywood hindi songs')}&media=music&entity=song&country=IN&limit=200`
         );
         
         if (fallbackResponse.ok) {
