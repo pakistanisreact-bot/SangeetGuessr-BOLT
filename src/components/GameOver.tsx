@@ -4,27 +4,26 @@ import { Decade } from '../types/game';
 
 interface GameOverProps {
   score: number;
-  questionsAnswered: number;
+  totalQuestions: number;
   decade: Decade;
   onRestart: () => void;
   onNewDecade: () => void;
 }
 
-export function GameOver({ score, questionsAnswered, decade, onRestart, onNewDecade }: GameOverProps) {
-  const percentage = questionsAnswered > 0 ? Math.round((score / questionsAnswered) * 100) : 0;
+export function GameOver({ score, totalQuestions, decade, onRestart, onNewDecade }: GameOverProps) {
+  const percentage = Math.round((score / totalQuestions) * 100);
   
   const getScoreMessage = () => {
-    if (score >= 20) return "Bollywood Legend! 🏆";
-    if (score >= 10) return "Music Master! 🎵";
-    if (score >= 5) return "Good Run! 🎶";
-    if (score >= 1) return "Nice Try! 🎤";
-    return "Better Luck Next Time! 🎵";
+    if (percentage >= 90) return "Bollywood Master! 🎵";
+    if (percentage >= 70) return "Music Enthusiast! 🎶";
+    if (percentage >= 50) return "Good Effort! 🎤";
+    return "Keep Practicing! 🎵";
   };
 
   const getScoreColor = () => {
-    if (score >= 20) return "text-yellow-600";
-    if (score >= 10) return "text-green-600";
-    if (score >= 5) return "text-blue-600";
+    if (percentage >= 90) return "text-yellow-600";
+    if (percentage >= 70) return "text-green-600";
+    if (percentage >= 50) return "text-blue-600";
     return "text-purple-600";
   };
 
@@ -45,16 +44,11 @@ export function GameOver({ score, questionsAnswered, decade, onRestart, onNewDec
           <div className="bg-gray-50 rounded-2xl p-6 mb-8">
             <div className="text-center">
               <div className="text-4xl font-bold text-gray-800 mb-2">
-                {score} Correct
+                {score}/{totalQuestions}
               </div>
               <div className="text-lg text-gray-600 mb-1">
-                Out of {questionsAnswered} Questions
+                {percentage}% Correct
               </div>
-              {questionsAnswered > 0 && (
-                <div className="text-sm text-gray-500 mb-2">
-                  {percentage}% Success Rate
-                </div>
-              )}
               <div className="text-sm text-gray-500">
                 {decade} Bollywood Songs
               </div>

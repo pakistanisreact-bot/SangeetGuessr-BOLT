@@ -32,7 +32,7 @@ function App() {
           question={gameState.currentQuestion}
           decade={gameState.selectedDecade}
           score={gameState.score}
-          questionsAnswered={gameState.questionsAnswered}
+          totalQuestions={gameState.totalQuestions}
           onAnswer={submitAnswer}
           onNextQuestion={nextQuestion}
           onRestart={restartGame}
@@ -48,7 +48,7 @@ function App() {
       return (
         <GameOver
           score={gameState.score}
-          questionsAnswered={gameState.questionsAnswered}
+          totalQuestions={gameState.totalQuestions}
           decade={gameState.selectedDecade}
           onRestart={() => startGame(gameState.selectedDecade!)}
           onNewDecade={restartGame}

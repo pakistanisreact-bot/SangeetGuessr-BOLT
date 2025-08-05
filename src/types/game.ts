@@ -18,15 +18,10 @@ export interface GameState {
   selectedDecade: string | null;
   currentQuestion: GameQuestion | null;
   score: number;
-  questionsAnswered: number;
+  totalQuestions: number;
   isPlaying: boolean;
   showAnswer: boolean;
   gamePhase: 'decade-selection' | 'playing' | 'answer-reveal' | 'game-over';
-  usedSongIds: Set<string>;
-  availableSongs: Song[];
-  consecutiveCorrect: number;
-  totalCorrect: number;
-  totalAttempted: number;
 }
 
 export type Decade = '1980s' | '1990s' | '2000s' | '2010s';

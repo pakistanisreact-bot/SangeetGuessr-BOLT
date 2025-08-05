@@ -6,7 +6,7 @@ interface GameBoardProps {
   question: GameQuestion;
   decade: Decade;
   score: number;
-  questionsAnswered: number;
+  totalQuestions: number;
   onAnswer: (isCorrect: boolean) => void;
   onNextQuestion: () => void;
   onRestart: () => void;
@@ -19,7 +19,7 @@ export function GameBoard({
   question, 
   decade, 
   score, 
-  questionsAnswered, 
+  totalQuestions, 
   onAnswer, 
   onNextQuestion, 
   onRestart,
@@ -122,10 +122,9 @@ export function GameBoard({
             </button>
             <div className="text-white">
               <span className="text-lg font-semibold">{decade}</span>
-              <div className="text-purple-200 text-sm">
-                <div>Correct: {score} | Questions: {questionsAnswered}</div>
-                <div>Keep going as long as you're right!</div>
-              </div>
+              <span className="ml-4 text-purple-200">
+                Score: {score}/{totalQuestions}
+              </span>
             </div>
           </div>
         </div>
@@ -250,9 +249,9 @@ export function GameBoard({
             <div className="text-center">
               <button
                 onClick={onNextQuestion}
-                className="px-8 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors"
+                className="px-8 py-3 bg-purple-600 text-white rounded-xl font-semibold hover:bg-purple-700 transition-colors"
               >
-                Continue Playing
+                Next Question
               </button>
             </div>
           )}

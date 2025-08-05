@@ -1,19 +1,7 @@
 class AppleMusicService {
   private baseUrl = 'https://itunes.apple.com/search';
-  private songCache: { [key: string]: any[] } = {};
 
-  async searchBollywoodSongs(decade: string, limit: number = 50, excludeIds: Set<string> = new Set()): Promise<any[]> {
-    // Check cache first
-    const cacheKey = `${decade}_${limit}`;
-    if (this.songCache[cacheKey] && this.songCache[cacheKey].length > 0) {
-      const cachedSongs = this.songCache[cacheKey].filter(song => 
-        !excludeIds.has(song.trackId.toString())
-      );
-      if (cachedSongs.length >= 10) {
-        return cachedSongs;
-      }
-    }
-
+  async searchBollywoodSongs(decade: string, limit: number = 50): Promise<any[]> {
     // Multiple search terms for better coverage
     const searchTerms: { [key: string]: string[] } = {
       '1980s': [
@@ -62,14 +50,13 @@ class AppleMusicService {
           track.previewUrl && 
           track.trackName && 
           track.artistName &&
-          track.kind === 'song' &&
-          !excludeIds.has(track.trackId.toString())
+          track.kind === 'song'
         );
         
         allSongs = [...allSongs, ...songsWithPreview];
         
-        // Continue searching to get more variety
-        if (allSongs.length >= limit) break;
+        // If we have enough songs, break early
+        if (allSongs.length >= 20) break;
       } catch (error) {
         console.warn(`Error searching for ${term}:`, error);
         continue;
@@ -81,16 +68,13 @@ class AppleMusicService {
       index === self.findIndex(s => s.trackId === song.trackId)
     );
 
-    // Cache the results
-    this.songCache[cacheKey] = uniqueSongs;
-
     console.log(`Found ${uniqueSongs.length} unique songs for ${decade}`);
     return uniqueSongs;
   }
 
-  async getRandomSongs(decade: string, count: number = 4, excludeIds: Set<string> = new Set()): Promise<any[]> {
+  async getRandomSongs(decade: string, count: number = 4): Promise<any[]> {
     try {
-      const songs = await this.searchBollywoodSongs(decade, 100, excludeIds);
+      const songs = await this.searchBollywoodSongs(decade, 100);
       
       if (songs.length < count) {
         // Fallback to general Bollywood search if decade-specific search fails
@@ -102,10 +86,7 @@ class AppleMusicService {
         if (fallbackResponse.ok) {
           const fallbackData = await fallbackResponse.json();
           const fallbackSongs = fallbackData.results.filter((track: any) => 
-            track.previewUrl && 
-            track.trackName && 
-            track.artistName &&
-            !excludeIds.has(track.trackId.toString())
+            track.previewUrl && track.trackName && track.artistName
           );
           
           if (fallbackSongs.length >= count) {
@@ -123,10 +104,6 @@ class AppleMusicService {
       console.error('Error getting random songs:', error);
       throw error;
     }
-  }
-
-  clearCache() {
-    this.songCache = {};
   }
 }
 
