@@ -1,5 +1,11 @@
 class AppleMusicService {
   private baseUrl = 'https://itunes.apple.com/search';
+  private usedSongs = new Set<string>();
+
+  // Clear used songs when starting a new game/category
+  clearUsedSongs() {
+    this.usedSongs.clear();
+  }
 
   async searchBollywoodSongs(decade: string, limit: number = 50): Promise<any[]> {
     // Multiple search terms for better coverage
@@ -64,8 +70,16 @@ class AppleMusicService {
     }
 
     // Remove duplicates based on trackId
-    const uniqueSongs = allSongs.filter((song, index, self) => 
-      index === self.findIndex(s => s.trackId === song.trackId)
+    const uniqueSongs = allSongs.filter((song, index, self) => {
+      const isFirstOccurrence = index === self.findIndex(s => s.trackId === song.trackId);
+      const notUsedBefore = !this.usedSongs.has(song.trackId.toString());
+      return isFirstOccurrence && notUsedBefore;
+    });
+
+    // Mark these songs as used
+    uniqueSongs.forEach(song => {
+      this.usedSongs.add(song.trackId.toString());
+    });
     );
 
     console.log(`Found ${uniqueSongs.length} unique songs for ${decade}`);

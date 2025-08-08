@@ -40,6 +40,9 @@ export function useGame() {
     setIsLoading(true);
     setError(null);
     
+    // Clear previously used songs for fresh game
+    appleMusicService.clearUsedSongs();
+    
     try {
       const appleMusicTracks = await appleMusicService.getRandomSongs(decade, 12);
       

@@ -15,6 +15,16 @@ interface GameBoardProps {
 
 const DURATIONS = [1, 2, 5, 15];
 
+function getCategoryGradient(decade: string): string {
+  const gradients: { [key: string]: string } = {
+    '1980s': 'from-purple-600 to-pink-600',
+    '1990s': 'from-blue-600 to-purple-600', 
+    '2000s': 'from-green-600 to-blue-600',
+    '2010s': 'from-orange-600 to-red-600'
+  };
+  return gradients[decade] || 'from-purple-600 to-blue-600';
+}
+
 export function GameBoard({ 
   question, 
   decade, 
@@ -132,15 +142,15 @@ export function GameBoard({
         {/* Main Game Area */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 mb-6">
           {/* Album Art */}
+          {/* Category Artwork */}
           <div className="text-center mb-8">
-            <div className="relative inline-block">
-              <img
-                src={question.correctSong.image_url}
-                alt="Album cover"
-                className="w-48 h-48 rounded-2xl shadow-lg mx-auto object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 rounded-2xl flex items-center justify-center">
-                <Volume2 className="w-12 h-12 text-white opacity-80" />
+            <div className="relative inline-block w-48 h-48 mx-auto">
+              <div className={`w-full h-full rounded-2xl shadow-lg bg-gradient-to-br ${getCategoryGradient(decade)} flex items-center justify-center`}>
+                <div className="text-center text-white">
+                  <Volume2 className="w-16 h-16 mx-auto mb-2 opacity-90" />
+                  <div className="text-2xl font-bold">{decade}</div>
+                  <div className="text-sm opacity-80">Bollywood</div>
+                </div>
               </div>
             </div>
           </div>
@@ -216,12 +226,10 @@ export function GameBoard({
                 className={getAnswerButtonClass(song)}
               >
                 <div className="flex items-center">
-                  <img
-                    src={song.image_url}
-                    alt={song.name}
-                    className="w-16 h-16 rounded-lg object-cover mr-4"
-                  />
-                  <div className="flex-1 text-left">
+                  <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center mr-4 flex-shrink-0">
+                    <Volume2 className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="flex-1 text-left min-w-0">
                     <h4 className="font-semibold text-lg mb-1">
                       {song.name}
                     </h4>
