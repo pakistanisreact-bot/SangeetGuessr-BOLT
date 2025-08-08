@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { GameState, GameQuestion, Song, Decade } from '../types/game';
 import { appleMusicService } from '../services/appleMusic';
 
-const QUESTIONS_PER_GAME = 5;
+const QUESTIONS_PER_GAME = 50;
 
 export function useGame() {
   const [gameState, setGameState] = useState<GameState>({

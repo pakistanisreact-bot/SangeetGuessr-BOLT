@@ -8,28 +8,16 @@ interface DecadeSelectorProps {
 
 const decades: { value: Decade; label: string; description: string; gradient: string }[] = [
   {
-    value: '1980s',
-    label: '1980s',
-    description: 'Classic Bollywood Era',
+    value: 'pre-2000s',
+    label: 'Pre-2000s',
+    description: 'Classic Bollywood Era (80s & 90s)',
     gradient: 'from-purple-600 to-pink-600'
   },
   {
-    value: '1990s', 
-    label: '1990s',
-    description: 'Golden Romance Period',
-    gradient: 'from-blue-600 to-purple-600'
-  },
-  {
-    value: '2000s',
-    label: '2000s', 
-    description: 'Modern Bollywood',
+    value: 'post-2000s',
+    label: 'Post-2000s',
+    description: 'Modern Bollywood Era (2000s & Beyond)',
     gradient: 'from-green-600 to-blue-600'
-  },
-  {
-    value: '2010s',
-    label: '2010s',
-    description: 'Contemporary Hits',
-    gradient: 'from-orange-600 to-red-600'
   }
 ];
 
@@ -45,31 +33,31 @@ export function DecadeSelector({ onDecadeSelect }: DecadeSelectorProps) {
             </h1>
           </div>
           <p className="text-xl text-purple-200 max-w-2xl mx-auto leading-relaxed">
-            Test your knowledge of Bollywood music across the decades. Choose your era and guess the song!
+            Test your knowledge of Bollywood music across two epic eras. Choose your category and play up to 50 rounds!
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {decades.map((decade) => (
             <button
               key={decade.value}
               onClick={() => onDecadeSelect(decade.value)}
-              className={`group relative overflow-hidden rounded-2xl p-8 text-left transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${decade.gradient}`}
+              className={`group relative overflow-hidden rounded-3xl p-10 text-left transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${decade.gradient}`}
             >
               <div className="relative z-10">
                 <div className="flex items-center mb-4">
-                  <Calendar className="w-8 h-8 text-white mr-3" />
-                  <h3 className="text-3xl font-bold text-white">
+                  <Calendar className="w-10 h-10 text-white mr-4" />
+                  <h3 className="text-4xl font-bold text-white">
                     {decade.label}
                   </h3>
                 </div>
-                <p className="text-lg text-white/90 mb-4">
+                <p className="text-xl text-white/90 mb-6">
                   {decade.description}
                 </p>
                 <div className="flex items-center text-white/80">
-                  <Music className="w-5 h-5 mr-2" />
-                  <span className="text-sm font-medium">
-                    Classic hits from the {decade.label}
+                  <Music className="w-6 h-6 mr-3" />
+                  <span className="text-base font-medium">
+                    Play up to 50 rounds of musical challenges
                   </span>
                 </div>
               </div>

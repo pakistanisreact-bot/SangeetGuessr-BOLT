@@ -17,10 +17,8 @@ const DURATIONS = [1, 2, 5, 15];
 
 function getCategoryGradient(decade: string): string {
   const gradients: { [key: string]: string } = {
-    '1980s': 'from-purple-600 to-pink-600',
-    '1990s': 'from-blue-600 to-purple-600', 
-    '2000s': 'from-green-600 to-blue-600',
-    '2010s': 'from-orange-600 to-red-600'
+    'pre-2000s': 'from-purple-600 to-pink-600',
+    'post-2000s': 'from-green-600 to-blue-600'
   };
   return gradients[decade] || 'from-purple-600 to-blue-600';
 }
@@ -133,7 +131,7 @@ export function GameBoard({
             <div className="text-white">
               <span className="text-lg font-semibold">{decade}</span>
               <span className="ml-4 text-purple-200">
-                Score: {score}/{totalQuestions}
+                Round {totalQuestions} • Score: {score}
               </span>
             </div>
           </div>
@@ -212,7 +210,7 @@ export function GameBoard({
               Which song is this?
             </h2>
             <p className="text-gray-600">
-              Choose the correct song from the {decade} Bollywood era
+              Choose the correct song from {decade === 'pre-2000s' ? 'Classic' : 'Modern'} Bollywood era
             </p>
           </div>
 

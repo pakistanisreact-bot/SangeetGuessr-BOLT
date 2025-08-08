@@ -10,33 +10,25 @@ class AppleMusicService {
   async searchBollywoodSongs(decade: string, limit: number = 50): Promise<any[]> {
     // Multiple search terms for better coverage
     const searchTerms: { [key: string]: string[] } = {
-      '1980s': [
-        'bollywood 1980s hindi songs',
-        'hindi film songs 80s',
-        'bollywood classics 1980',
-        'hindi movie songs 80s'
+      'pre-2000s': [
+        'bollywood 90s hindi songs classic',
+        'hindi film songs 80s 90s',
+        'bollywood classics retro hindi',
+        'old bollywood songs hindi',
+        'vintage bollywood music hindi',
+        'bollywood golden era songs'
       ],
-      '1990s': [
-        'bollywood 1990s hindi songs', 
-        'hindi film songs 90s',
-        'bollywood hits 1990',
-        'hindi movie songs 90s'
-      ],
-      '2000s': [
-        'bollywood 2000s hindi songs',
-        'hindi film songs 2000',
-        'bollywood hits 2000s',
-        'hindi movie songs 2000'
-      ],
-      '2010s': [
-        'bollywood 2010s hindi songs',
-        'hindi film songs 2010',
-        'bollywood hits 2010s',
-        'hindi movie songs 2010'
+      'post-2000s': [
+        'bollywood 2000s 2010s hindi songs',
+        'modern bollywood hindi music',
+        'new bollywood songs hindi',
+        'contemporary bollywood hits',
+        'bollywood 21st century hindi',
+        'latest bollywood music hindi'
       ]
     };
 
-    const terms = searchTerms[decade] || searchTerms['2000s'];
+    const terms = searchTerms[decade] || searchTerms['post-2000s'];
     let allSongs: any[] = [];
 
     // Try multiple search terms to get more results

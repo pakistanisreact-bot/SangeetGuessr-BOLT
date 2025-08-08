@@ -24,4 +24,4 @@ export interface GameState {
   gamePhase: 'decade-selection' | 'playing' | 'answer-reveal' | 'game-over';
 }
 
-export type Decade = '1980s' | '1990s' | '2000s' | '2010s';
+export type Decade = 'pre-2000s' | 'post-2000s';

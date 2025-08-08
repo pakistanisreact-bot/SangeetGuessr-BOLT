@@ -50,7 +50,7 @@ export function GameOver({ score, totalQuestions, decade, onRestart, onNewDecade
                 {percentage}% Correct
               </div>
               <div className="text-sm text-gray-500">
-                {decade} Bollywood Songs
+                {decade === 'pre-2000s' ? 'Classic Bollywood (Pre-2000s)' : 'Modern Bollywood (Post-2000s)'}
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export function GameOver({ score, totalQuestions, decade, onRestart, onNewDecade
               className="w-full flex items-center justify-center px-6 py-3 bg-purple-600 text-white rounded-xl font-semibold hover:bg-purple-700 transition-colors"
             >
               <RotateCcw className="w-5 h-5 mr-2" />
-              Play {decade} Again
+              Play {decade === 'pre-2000s' ? 'Classic Era' : 'Modern Era'} Again
             </button>
             
             <button
