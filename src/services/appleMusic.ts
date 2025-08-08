@@ -80,7 +80,6 @@ class AppleMusicService {
     uniqueSongs.forEach(song => {
       this.usedSongs.add(song.trackId.toString());
     });
-    );
 
     console.log(`Found ${uniqueSongs.length} unique songs for ${decade}`);
     return uniqueSongs;
